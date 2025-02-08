@@ -1,14 +1,17 @@
-﻿using System;
+﻿using PointOfSales.BLL;
+using PointOfSales.UI;
+using System;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using PointOfSales.Datos;
-using PointOfSales.Negocio;
 
 namespace PointOfSales
 {
     public partial class FormMain : Form
     {
+
+        private LogAccesosBLL logAccesosBLL; // Declara la variable
+
 
         // timer que controla el reloj principal
         private Timer timer;
@@ -20,6 +23,9 @@ namespace PointOfSales
         public FormMain()
         {
             InitializeComponent();
+
+            logAccesosBLL = new LogAccesosBLL(); // Inicializa la instancia
+
 
             // Configurar el evento PrintPage para definir el contenido del ticket.
             printDocument.PrintPage += new PrintPageEventHandler(PrintDocument_PrintPage);
@@ -121,21 +127,6 @@ namespace PointOfSales
             
         }
 
-       
-
-
-
-
-        private void labelReloj_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void tabControl1_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
@@ -176,13 +167,28 @@ namespace PointOfSales
         {
 
 
-            facturaciónToolStripMenuItem.Visible = true;
-            archivoToolStripMenuItem.Visible = true;
-            reportesToolStripMenuItem.Visible = true;
-            corteDeCajaToolStripMenuItem.Visible = true;
-            panel1.Visible = true;
-            panel2.Visible = true;
-            abrirTurnoToolStripMenuItem.Visible = false;
+            // Mostrar el formulario de inicio de sesión
+            using (FormLogin formLogin = new FormLogin(logAccesosBLL))
+            {
+                Hide(); // Oculta el formulario principal
+                var resultado = formLogin.ShowDialog(); // Muestra el formulario como diálogo modal
+
+                if (formLogin.LoginExitoso) // Verifica si el inicio de sesión fue exitoso
+                {
+                    Show(); // Muestra el formulario principal
+                    // Mostrar los elementos de la interfaz
+                    facturaciónToolStripMenuItem.Visible = true;
+                    archivoToolStripMenuItem.Visible = true;
+                    reportesToolStripMenuItem.Visible = true;
+                    corteDeCajaToolStripMenuItem.Visible = true;
+                    panel1.Visible = true;
+                    panel2.Visible = true;
+
+                    // Ocultar el botón "Abrir Turno"
+                    abrirTurnoToolStripMenuItem.Visible = false;
+                }
+            }
+
 
 
         }
@@ -234,9 +240,6 @@ namespace PointOfSales
             ImprimirTicket();
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }
