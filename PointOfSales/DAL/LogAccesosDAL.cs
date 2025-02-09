@@ -28,10 +28,12 @@ namespace PointOfSales.DAL
                 {
                     if (reader.Read())
                     {
+                        conn.Close();
                         return (int)reader["Id"]; // Retorna el Id del usuario si las credenciales son válidas
                     }
                     else
                     {
+                        conn.Close();
                         throw new Exception("Credenciales incorrectas.");
                     }
                 }
@@ -50,6 +52,7 @@ namespace PointOfSales.DAL
                 cmd.Parameters.AddWithValue("@Operacion", operacion);
 
                 cmd.ExecuteNonQuery();
+                conn.Close();
             }
         }
     }

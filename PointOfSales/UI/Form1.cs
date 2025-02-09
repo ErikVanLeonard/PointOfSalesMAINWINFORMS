@@ -165,17 +165,16 @@ namespace PointOfSales
         // Abrir turno
         private void abrirTurnoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Hide();
 
             // Mostrar el formulario de inicio de sesión
-            using (FormLogin formLogin = new FormLogin(logAccesosBLL))
+            using (FormLogin formLogin = new FormLogin())
             {
-                Hide(); // Oculta el formulario principal
                 var resultado = formLogin.ShowDialog(); // Muestra el formulario como diálogo modal
 
                 if (formLogin.LoginExitoso) // Verifica si el inicio de sesión fue exitoso
                 {
-                    Show(); // Muestra el formulario principal
+                    Show();
                     // Mostrar los elementos de la interfaz
                     facturaciónToolStripMenuItem.Visible = true;
                     archivoToolStripMenuItem.Visible = true;

@@ -34,16 +34,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnRegistrarUsuario = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnLogin
             // 
+            this.BtnLogin.BackColor = System.Drawing.Color.LimeGreen;
+            this.BtnLogin.FlatAppearance.BorderSize = 0;
+            this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnLogin.Location = new System.Drawing.Point(12, 83);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(137, 38);
             this.BtnLogin.TabIndex = 0;
             this.BtnLogin.Text = "Iniciar Sesión";
-            this.BtnLogin.UseVisualStyleBackColor = true;
+            this.BtnLogin.UseVisualStyleBackColor = false;
             this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // txtUsuario
@@ -80,25 +84,42 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.BackColor = System.Drawing.Color.Crimson;
+            this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Location = new System.Drawing.Point(164, 83);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(137, 38);
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnRegistrarUsuario
+            // 
+            this.btnRegistrarUsuario.AllowDrop = true;
+            this.btnRegistrarUsuario.Location = new System.Drawing.Point(211, 175);
+            this.btnRegistrarUsuario.Name = "btnRegistrarUsuario";
+            this.btnRegistrarUsuario.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrarUsuario.TabIndex = 6;
+            this.btnRegistrarUsuario.Text = "btnRegistrarUsuario";
+            this.btnRegistrarUsuario.UseVisualStyleBackColor = true;
+            this.btnRegistrarUsuario.Click += new System.EventHandler(this.btnRegistrarUsuario_Click);
             // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 137);
+            this.BackColor = System.Drawing.Color.DarkCyan;
+            this.ClientSize = new System.Drawing.Size(328, 234);
+            this.Controls.Add(this.btnRegistrarUsuario);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.txtContraseña);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.BtnLogin);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -117,5 +138,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnRegistrarUsuario;
     }
 }
