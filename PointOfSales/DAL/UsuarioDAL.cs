@@ -60,7 +60,7 @@ namespace PointOfSales.DAL
                 {
                     if (reader.Read())
                     {
-                        conn.Close();
+                        //conn.Close();
 
                         return new Usuario
                         {

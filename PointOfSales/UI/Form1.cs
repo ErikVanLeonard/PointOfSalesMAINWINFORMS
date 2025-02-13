@@ -1,6 +1,10 @@
 ﻿using PointOfSales.BLL;
+using PointOfSales.DAL;
+using PointOfSales.Entities;
 using PointOfSales.UI;
+using PointOfSales.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
@@ -9,236 +13,217 @@ namespace PointOfSales
 {
     public partial class FormMain : Form
     {
-
-        private LogAccesosBLL logAccesosBLL; // Declara la variable
-
-
-        // timer que controla el reloj principal
-        private Timer timer;
-
-        // instancia de impresión de ticket principal de venta
-        private PrintDocument printDocument = new PrintDocument();
-        private PrintPreviewDialog previewDialog = new PrintPreviewDialog();
+        private LogAccesosBLL logAccesosBLL;
+        private TicketPrinter ticketPrinter;
+        private ClockManager clockManager;
+        private TabManager tabManager;
+        private VentaBLL ventaBLL = new VentaBLL();
+        private decimal totalVenta = 0;
 
         public FormMain()
         {
             InitializeComponent();
-
-            logAccesosBLL = new LogAccesosBLL(); // Inicializa la instancia
-
-
-            // Configurar el evento PrintPage para definir el contenido del ticket.
-            printDocument.PrintPage += new PrintPageEventHandler(PrintDocument_PrintPage);
-
-            // Configurar el PrintPreviewDialog
-            previewDialog.Document = printDocument;
-            previewDialog.Width = 315;
-            previewDialog.Height = 800;
-
-            // Configurar el temporizador
-            timer = new Timer();
-            timer.Interval = 1000; // 1000 ms = 1 segundo
-            timer.Tick += new EventHandler(UpdateClock); // Asigna el evento Tick del temporizador
-            timer.Start();
-
-            this.KeyPreview = true; // Permite al formulario capturar eventos de teclado
-            this.KeyDown += new KeyEventHandler(FormMain_KeyDown); // Asignar el evento KeyDown
-
-
-            
-
+            InitializeComponents();
         }
 
-
-
-        // Método para configurar y enviar el ticket a la impresora predeterminada.
-        private void ImprimirTicket()
+        private void InitializeComponents()
         {
-            try
-            {
-                // Configurar el tamaño del ticket para impresoras térmicas
-                ConfigurarTamanoTicket();
-
-                // Imprimir el ticket
-                //printDocument.PrinterSettings.PrinterName = "Nombre de la Impresora"; // O usar la predeterminada
-                printDocument.Print(); // Llamar a imprimir directamente
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al imprimir: " + ex.Message);
-            }
+            this.TopMost = false;
+            this.SendToBack();
+            logAccesosBLL = new LogAccesosBLL();
+            clockManager = new ClockManager(labelReloj);
+            tabManager = new TabManager(tabControl1);
+            this.KeyPreview = true;
+            this.KeyDown += FormMain_KeyDown;
         }
-
-        // Método que define cómo se dibuja el ticket en la página.
-        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
-        {
-
-            ConfigurarTamanoTicket();
-
-            Graphics g = e.Graphics;
-
-            // Configurar el contenido del ticket (texto y formato).
-            Font font = new Font("Arial", 10, FontStyle.Regular);
-            float posY = 20;
-
-            // Imprimir título del ticket
-            g.DrawString("TICKET DE COMPRA", new Font("Arial", 14, FontStyle.Bold), Brushes.Black, new PointF(10, posY));
-            posY += 30;
-
-            // Imprimir detalles de compra
-            g.DrawString("Producto A - $50.00", font, Brushes.Black, new PointF(10, posY));
-            posY += 20;
-            g.DrawString("Producto B - $30.00", font, Brushes.Black, new PointF(10, posY));
-            posY += 20;
-
-            // Imprimir totales
-            g.DrawString("Total: $80.00", new Font("Arial", 12, FontStyle.Bold), Brushes.Black, new PointF(10, posY));
-        }
-
-        //configuración del ticket de impresion tamaño
-        private void ConfigurarTamanoTicket()
-        {
-            // Crear un tamaño de papel personalizado para el ticket (por ejemplo, 80 mm de ancho por 200 mm de largo)
-            PaperSize tamañoTicket = new PaperSize("TicketPersonalizado", 315, 800); // 80mm de ancho (315/100 pulgadas)
-
-            // Asignar el tamaño personalizado a las configuraciones de página
-            printDocument.DefaultPageSettings.PaperSize = tamañoTicket;
-
-            // Si es necesario ajustar los márgenes (opcional)
-            Margins margenes = new Margins(0, 0, 0, 0); // Sin márgenes
-            printDocument.DefaultPageSettings.Margins = margenes;
-        }
-
-
-        // Evento que actualiza la hora en el Label
-        private void UpdateClock(object sender, EventArgs e)
-        {
-            labelReloj.Text = DateTime.Now.ToString("hh:mm:ss tt"); // Mostrar la hora en formato de 24 horas
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            UpdateClock(sender, e);
-
-            // Establecer el texto inicial de la barra de estado
-            toolStripStatusLabel1.Text = "CONECTADO";
-            toolStripProgressBar1.Value = 100;
-            toolStripProgressBar1.Visible = false;
-
-            
-        }
-
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-
-            // Verifica si el TabControl tiene pestañas
-            if (tabControl1.TabPages.Count == 0) return;
-
-            // Cambiar de pestaña según la tecla presionada
-            switch (e.KeyCode)
-            {
-                case Keys.F1: // Si presiona F2, cambiar a la primera pestaña (índice 0)
-                    tabControl1.SelectedIndex = 0;
-                    break;
-                case Keys.F2: // Si presiona F3, cambiar a la segunda pestaña (índice 1)
-                    if (tabControl1.TabPages.Count > 1)
-                        tabControl1.SelectedIndex = 1;
-                    break;
-                case Keys.F3: // Si presiona F4, cambiar a la tercera pestaña (índice 2)
-                    if (tabControl1.TabPages.Count > 2)
-                        tabControl1.SelectedIndex = 2;
-                    break;
-                case Keys.F4: // Si presiona F4, cambiar a la tercera pestaña (índice 2)
-                    if (tabControl1.TabPages.Count > 3)
-                        tabControl1.SelectedIndex = 3;
-                    break;
-                case Keys.F5: // Si presiona F5, cambiar a la tercera pestaña (índice 2)
-                    if (tabControl1.TabPages.Count > 4)
-                        tabControl1.SelectedIndex = 4;
-                    break;
-                // Puedes agregar más teclas según la cantidad de pestañas
-                default:
-                    break;
-            }
-        }
-
-        // Abrir turno
-        private void abrirTurnoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Hide();
-
-            // Mostrar el formulario de inicio de sesión
-            using (FormLogin formLogin = new FormLogin())
-            {
-                var resultado = formLogin.ShowDialog(); // Muestra el formulario como diálogo modal
-
-                if (formLogin.LoginExitoso) // Verifica si el inicio de sesión fue exitoso
-                {
-                    Show();
-                    // Mostrar los elementos de la interfaz
-                    facturaciónToolStripMenuItem.Visible = true;
-                    archivoToolStripMenuItem.Visible = true;
-                    reportesToolStripMenuItem.Visible = true;
-                    corteDeCajaToolStripMenuItem.Visible = true;
-                    panel1.Visible = true;
-                    panel2.Visible = true;
-
-                    // Ocultar el botón "Abrir Turno"
-                    abrirTurnoToolStripMenuItem.Visible = false;
-                }
-            }
-
-
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 3;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 2;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 1;
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 0;
-        }
-
-        private void btnPedidos_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 4;
-        }
-
-        private void configuraciónToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           
+            tabManager.CambiarPestana(e.KeyCode);
         }
 
         private void btnImprimirTicket_Click(object sender, EventArgs e)
         {
-            
-            //Mostrar la vista previa del ticket antes de imprimir
-            previewDialog.ShowDialog();
+            try
+            {
+                var ultimaVenta = ventaBLL.ObtenerUltimaVenta();
+                if (ultimaVenta == null || ultimaVenta.Detalles.Count == 0)
+                {
+                    MessageBox.Show("No hay ventas registradas en el corte actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                ticketPrinter = new TicketPrinter(ultimaVenta);
+                ticketPrinter.MostrarVistaPrevia();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCobrarVenta_Click(object sender, EventArgs e)
         {
-            ImprimirTicket();
+            try
+            {
+                // Crear y registrar la venta
+                Venta venta = CrearVenta();
+                ventaBLL.RegistrarVenta(venta);
+
+                // Imprimir el ticket
+                ticketPrinter = new TicketPrinter(dgvProductosVenta, venta.Total);
+                ticketPrinter.ImprimirTicket();
+
+                // Limpiar el formulario
+                LimpiarFormulario();
+                MessageBox.Show("Venta registrada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-      
+        private Venta CrearVenta()
+        {
+            return new Venta
+            {
+                Fecha = DateTime.Now,
+                Total = CalcularTotal(),
+                IdUsuario = ObtenerIdUsuarioActual(),
+                Detalles = ObtenerDetallesVenta()
+            };
+        }
+
+        private void abrirTurnoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+            using (FormLogin formLogin = new FormLogin())
+            {
+                var resultado = formLogin.ShowDialog();
+                if (formLogin.LoginExitoso)
+                {
+                    Show();
+                    HabilitarInterfaz();
+                    LoggerManager.Instance.LogInfo("Aplicación iniciada - Usuario Accedió: " + formLogin.idUsuarioActual);
+                }
+            }
+        }
+
+        private void HabilitarInterfaz()
+        {
+            facturaciónToolStripMenuItem.Visible = true;
+            archivoToolStripMenuItem.Visible = true;
+            reportesToolStripMenuItem.Visible = true;
+            corteDeCajaToolStripMenuItem.Visible = true;
+            panel1.Visible = true;
+            panel2.Visible = true;
+            abrirTurnoToolStripMenuItem.Visible = false;
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "CONECTADO";
+            toolStripProgressBar1.Value = 100;
+            toolStripProgressBar1.Visible = false;
+        }
+
+        
+
+        private void AgregarProductoAlDataGridView(Producto producto)
+        {
+            foreach (DataGridViewRow row in dgvProductosVenta.Rows)
+            {
+                if ((int)row.Cells["IdProducto"].Value == producto.Id)
+                {
+                    int cantidadActual = (int)row.Cells["Cantidad"].Value;
+                    row.Cells["Cantidad"].Value = cantidadActual + 1;
+                    row.Cells["Importe"].Value = (cantidadActual + 1) * producto.Precio;
+                    ActualizarTotalVenta();
+                    return;
+                }
+            }
+
+            dgvProductosVenta.Rows.Add(producto.Id, producto.Nombre, producto.Precio, 1, producto.Precio, producto.Stock);
+            ActualizarTotalVenta();
+        }
+
+        private void ActualizarTotalVenta()
+        {
+            totalVenta = 0;
+            foreach (DataGridViewRow row in dgvProductosVenta.Rows)
+            {
+                if (row.Cells["Importe"].Value != null)
+                {
+                    totalVenta += Convert.ToDecimal(row.Cells["Importe"].Value);
+                }
+            }
+            lblTotal.Text = $"${totalVenta:F2}";
+        }
+
+        private List<DetalleVenta> ObtenerDetallesVenta()
+        {
+            List<DetalleVenta> detalles = new List<DetalleVenta>();
+            foreach (DataGridViewRow row in dgvProductosVenta.Rows)
+            {
+                detalles.Add(new DetalleVenta
+                {
+                    IdProducto = Convert.ToInt32(row.Cells["IdProducto"].Value),
+                    Cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value),
+                    Subtotal = Convert.ToDecimal(row.Cells["Importe"].Value)
+                });
+            }
+            return detalles;
+        }
+
+        private decimal CalcularTotal()
+        {
+            decimal total = 0;
+            foreach (DataGridViewRow row in dgvProductosVenta.Rows)
+            {
+                if (row.Cells["Importe"].Value != null)
+                {
+                    total += Convert.ToDecimal(row.Cells["Importe"].Value);
+                }
+            }
+            return total;
+        }
+
+        private int ObtenerIdUsuarioActual()
+        {
+            // Lógica para obtener el ID del usuario actual
+            return 1; // Reemplaza con tu lógica
+        }
+
+        private void LimpiarFormulario()
+        {
+            dgvProductosVenta.Rows.Clear();
+            lblTotal.Text = "$0.00";
+            totalVenta = 0;
+        }
+
+        private void txtBuscarProducto_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                try
+                {
+                    string codigoBarras = txtBuscarProducto.Text.Trim();
+                    if (string.IsNullOrWhiteSpace(codigoBarras))
+                    {
+                        MessageBox.Show("Por favor, ingresa un código de barras válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    Producto producto = new ProductoDAL().ObtenerProductoPorCodigoBarras(codigoBarras);
+                    AgregarProductoAlDataGridView(producto);
+                    txtBuscarProducto.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +46,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControlVentas = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvProductosVenta = new System.Windows.Forms.DataGridView();
             this.ColumnCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,7 +63,7 @@
             this.btnProductoComun = new System.Windows.Forms.Button();
             this.bntInsertarVarios = new System.Windows.Forms.Button();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtBuscarProducto = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
@@ -105,7 +105,7 @@
             this.panel3.SuspendLayout();
             this.tabControlVentas.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosVenta)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabClientes.SuspendLayout();
@@ -146,7 +146,6 @@
             this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
             this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.configuraciónToolStripMenuItem.Text = "Configuración";
-            this.configuraciónToolStripMenuItem.Click += new System.EventHandler(this.configuraciónToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem
             // 
@@ -254,7 +253,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.DarkCyan;
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.dgvProductosVenta);
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -262,45 +261,45 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ticket 1";
             // 
-            // dataGridView1
+            // dgvProductosVenta
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkCyan;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.DarkCyan;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvProductosVenta.AllowUserToAddRows = false;
+            this.dgvProductosVenta.AllowUserToDeleteRows = false;
+            this.dgvProductosVenta.BackgroundColor = System.Drawing.Color.DarkCyan;
+            this.dgvProductosVenta.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DarkCyan;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductosVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvProductosVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductosVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnCodigo,
             this.ColumnProducto,
             this.ColumnPrecio,
             this.ColumnCantidad,
             this.ColumnImporte,
             this.ColumnExistencia});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.DarkCyan;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.Size = new System.Drawing.Size(1000, 168);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvProductosVenta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProductosVenta.GridColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgvProductosVenta.Location = new System.Drawing.Point(3, 3);
+            this.dgvProductosVenta.Margin = new System.Windows.Forms.Padding(0);
+            this.dgvProductosVenta.Name = "dgvProductosVenta";
+            this.dgvProductosVenta.ReadOnly = true;
+            this.dgvProductosVenta.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DarkCyan;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductosVenta.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvProductosVenta.Size = new System.Drawing.Size(1000, 168);
+            this.dgvProductosVenta.TabIndex = 0;
             // 
             // ColumnCodigo
             // 
@@ -350,7 +349,7 @@
             this.panel5.Controls.Add(this.btnProductoComun);
             this.panel5.Controls.Add(this.bntInsertarVarios);
             this.panel5.Controls.Add(this.btnAgregarProducto);
-            this.panel5.Controls.Add(this.textBox1);
+            this.panel5.Controls.Add(this.txtBuscarProducto);
             this.panel5.Controls.Add(this.label11);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
@@ -476,12 +475,13 @@
             this.btnAgregarProducto.Text = "ENT | Agregar Producto";
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // txtBuscarProducto
             // 
-            this.textBox1.Location = new System.Drawing.Point(133, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(476, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtBuscarProducto.Location = new System.Drawing.Point(133, 6);
+            this.txtBuscarProducto.Name = "txtBuscarProducto";
+            this.txtBuscarProducto.Size = new System.Drawing.Size(476, 20);
+            this.txtBuscarProducto.TabIndex = 1;
+            this.txtBuscarProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscarProducto_KeyPress_1);
             // 
             // label11
             // 
@@ -766,7 +766,6 @@
             this.panel1.Size = new System.Drawing.Size(1031, 479);
             this.panel1.TabIndex = 2;
             this.panel1.Visible = false;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // statusStrip1
             // 
@@ -857,7 +856,6 @@
             this.btnVentas.TabIndex = 4;
             this.btnVentas.Text = "F1 | VENTAS";
             this.btnVentas.UseVisualStyleBackColor = false;
-            this.btnVentas.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // btnClientes
             // 
@@ -871,7 +869,6 @@
             this.btnClientes.TabIndex = 5;
             this.btnClientes.Text = "F2 | CLIENTES";
             this.btnClientes.UseVisualStyleBackColor = false;
-            this.btnClientes.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnProductos
             // 
@@ -885,7 +882,6 @@
             this.btnProductos.TabIndex = 6;
             this.btnProductos.Text = "F3 | PRODUCTOS";
             this.btnProductos.UseVisualStyleBackColor = false;
-            this.btnProductos.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnInventario
             // 
@@ -899,7 +895,6 @@
             this.btnInventario.TabIndex = 7;
             this.btnInventario.Text = "F4 | INVENTARIO";
             this.btnInventario.UseVisualStyleBackColor = false;
-            this.btnInventario.Click += new System.EventHandler(this.button4_Click);
             // 
             // FormMain
             // 
@@ -917,7 +912,6 @@
             this.Text = "PUNTO DE VENTA | landskape.com.mx";
             this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -926,7 +920,7 @@
             this.panel3.ResumeLayout(false);
             this.tabControlVentas.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosVenta)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -989,7 +983,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtBuscarProducto;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnAgregarProducto;
         private System.Windows.Forms.Button bntInsertarVarios;
@@ -1005,7 +999,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnAsignarCliente;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvProductosVenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrecio;
