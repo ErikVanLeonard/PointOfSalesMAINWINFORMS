@@ -18,6 +18,7 @@ namespace PointOfSales.UI
 
         // Propiedad para almacenar el resultado del inicio de sesión
         public bool LoginExitoso { get; private set; } = false;
+        public int idUsuarioActual { get; private set; } = 0;
 
         // Constructor que acepta una instancia de LogAccesosBLL
         public FormLogin()
@@ -50,6 +51,7 @@ namespace PointOfSales.UI
 
                 // Si las credenciales son válidas, marcar el inicio de sesión como exitoso
                 LoginExitoso = true;
+                idUsuarioActual = idUsuario;
 
                 MessageBox.Show("Inicio de sesión exitoso.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -75,10 +77,10 @@ namespace PointOfSales.UI
             try
             {
                 // Obtener los valores ingresados por el usuario
-                string nombre = "DEMO INSERTADO";
-                string correo = "demo@insertado.com";
-                string contraseña = "Pass1512";
-                string confirmarContraseña = "Pass1512";
+                string nombre = "DEMO INSERTADO2";
+                string correo = "demo@insertado2.com";
+                string contraseña = "Pass151297";
+                string confirmarContraseña = "Pass151297";
                 string rol = "Administrador";
 
                 // Validar que los campos no estén vacíos
