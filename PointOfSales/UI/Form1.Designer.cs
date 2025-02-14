@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +48,12 @@
             this.tabControlVentas = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvProductosVenta = new System.Windows.Forms.DataGridView();
+            this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnVerificador = new System.Windows.Forms.Button();
             this.btnBorrarArt = new System.Windows.Forms.Button();
@@ -93,12 +100,6 @@
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnInventario = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabVentas.SuspendLayout();
@@ -116,7 +117,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.reportesToolStripMenuItem,
@@ -218,25 +219,26 @@
             // 
             // tabVentas
             // 
-            this.tabVentas.BackColor = System.Drawing.Color.DarkCyan;
+            this.tabVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.tabVentas.Controls.Add(this.panel3);
             this.tabVentas.Location = new System.Drawing.Point(4, 32);
+            this.tabVentas.Margin = new System.Windows.Forms.Padding(0);
             this.tabVentas.Name = "tabVentas";
-            this.tabVentas.Padding = new System.Windows.Forms.Padding(3);
             this.tabVentas.Size = new System.Drawing.Size(1020, 356);
             this.tabVentas.TabIndex = 0;
             this.tabVentas.Text = "VENTAS";
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.CadetBlue;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.panel3.Controls.Add(this.tabControlVentas);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1014, 350);
+            this.panel3.Size = new System.Drawing.Size(1020, 356);
             this.panel3.TabIndex = 1;
             // 
             // tabControlVentas
@@ -247,17 +249,17 @@
             this.tabControlVentas.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlVentas.Name = "tabControlVentas";
             this.tabControlVentas.SelectedIndex = 0;
-            this.tabControlVentas.Size = new System.Drawing.Size(1014, 201);
+            this.tabControlVentas.Size = new System.Drawing.Size(1020, 207);
             this.tabControlVentas.TabIndex = 4;
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.DarkCyan;
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.tabPage1.Controls.Add(this.dgvProductosVenta);
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1006, 174);
+            this.tabPage1.Size = new System.Drawing.Size(1012, 180);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ticket 1";
             // 
@@ -265,10 +267,12 @@
             // 
             this.dgvProductosVenta.AllowUserToAddRows = false;
             this.dgvProductosVenta.AllowUserToDeleteRows = false;
-            this.dgvProductosVenta.BackgroundColor = System.Drawing.Color.DarkCyan;
+            this.dgvProductosVenta.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(21)))), ((int)(((byte)(36)))));
             this.dgvProductosVenta.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvProductosVenta.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvProductosVenta.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DarkCyan;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -283,27 +287,75 @@
             this.Cantidad,
             this.Importe,
             this.Existencia});
+            this.dgvProductosVenta.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductosVenta.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProductosVenta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProductosVenta.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvProductosVenta.Location = new System.Drawing.Point(3, 3);
+            this.dgvProductosVenta.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
+            this.dgvProductosVenta.Location = new System.Drawing.Point(0, 0);
             this.dgvProductosVenta.Margin = new System.Windows.Forms.Padding(0);
             this.dgvProductosVenta.Name = "dgvProductosVenta";
             this.dgvProductosVenta.ReadOnly = true;
             this.dgvProductosVenta.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DarkCyan;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductosVenta.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvProductosVenta.Size = new System.Drawing.Size(1000, 168);
+            this.dgvProductosVenta.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductosVenta.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvProductosVenta.RowHeadersVisible = false;
+            this.dgvProductosVenta.Size = new System.Drawing.Size(1012, 180);
             this.dgvProductosVenta.TabIndex = 0;
+            this.dgvProductosVenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductosVenta_CellContentClick);
+            // 
+            // IdProducto
+            // 
+            this.IdProducto.HeaderText = "Codigo de barras";
+            this.IdProducto.Name = "IdProducto";
+            this.IdProducto.ReadOnly = true;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Descripción producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio Venta";
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // Importe
+            // 
+            this.Importe.HeaderText = "Importe";
+            this.Importe.Name = "Importe";
+            this.Importe.ReadOnly = true;
+            // 
+            // Existencia
+            // 
+            this.Existencia.HeaderText = "Existencia";
+            this.Existencia.Name = "Existencia";
+            this.Existencia.ReadOnly = true;
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.panel5.Controls.Add(this.btnVerificador);
             this.panel5.Controls.Add(this.btnBorrarArt);
             this.panel5.Controls.Add(this.btnSalidas);
@@ -319,12 +371,13 @@
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1014, 69);
+            this.panel5.Size = new System.Drawing.Size(1020, 69);
             this.panel5.TabIndex = 3;
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // btnVerificador
             // 
-            this.btnVerificador.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnVerificador.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnVerificador.FlatAppearance.BorderSize = 0;
             this.btnVerificador.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVerificador.ForeColor = System.Drawing.SystemColors.Control;
@@ -337,7 +390,7 @@
             // 
             // btnBorrarArt
             // 
-            this.btnBorrarArt.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnBorrarArt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnBorrarArt.FlatAppearance.BorderSize = 0;
             this.btnBorrarArt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorrarArt.ForeColor = System.Drawing.SystemColors.Control;
@@ -350,7 +403,7 @@
             // 
             // btnSalidas
             // 
-            this.btnSalidas.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnSalidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnSalidas.FlatAppearance.BorderSize = 0;
             this.btnSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalidas.ForeColor = System.Drawing.SystemColors.Control;
@@ -363,7 +416,7 @@
             // 
             // btnEntradas
             // 
-            this.btnEntradas.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnEntradas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnEntradas.FlatAppearance.BorderSize = 0;
             this.btnEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEntradas.ForeColor = System.Drawing.SystemColors.Control;
@@ -376,7 +429,7 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkCyan;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
@@ -389,7 +442,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnBuscar.FlatAppearance.BorderSize = 0;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.ForeColor = System.Drawing.SystemColors.Control;
@@ -402,7 +455,7 @@
             // 
             // btnProductoComun
             // 
-            this.btnProductoComun.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnProductoComun.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnProductoComun.FlatAppearance.BorderSize = 0;
             this.btnProductoComun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductoComun.ForeColor = System.Drawing.SystemColors.Control;
@@ -415,7 +468,7 @@
             // 
             // bntInsertarVarios
             // 
-            this.bntInsertarVarios.BackColor = System.Drawing.Color.DarkCyan;
+            this.bntInsertarVarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.bntInsertarVarios.FlatAppearance.BorderSize = 0;
             this.bntInsertarVarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntInsertarVarios.ForeColor = System.Drawing.SystemColors.Control;
@@ -428,7 +481,7 @@
             // 
             // btnAgregarProducto
             // 
-            this.btnAgregarProducto.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnAgregarProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnAgregarProducto.FlatAppearance.BorderSize = 0;
             this.btnAgregarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarProducto.ForeColor = System.Drawing.SystemColors.Control;
@@ -459,7 +512,7 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.panel4.Controls.Add(this.label13);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.btnAsignarCliente);
@@ -477,10 +530,10 @@
             this.panel4.Controls.Add(this.btnCobrarVenta);
             this.panel4.Controls.Add(this.btnImprimirTicket);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 270);
+            this.panel4.Location = new System.Drawing.Point(0, 276);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1014, 80);
+            this.panel4.Size = new System.Drawing.Size(1020, 80);
             this.panel4.TabIndex = 2;
             // 
             // label13
@@ -507,7 +560,7 @@
             // 
             // btnAsignarCliente
             // 
-            this.btnAsignarCliente.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnAsignarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnAsignarCliente.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnAsignarCliente.FlatAppearance.BorderSize = 0;
             this.btnAsignarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -601,7 +654,7 @@
             // 
             // btnPendiente
             // 
-            this.btnPendiente.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnPendiente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnPendiente.FlatAppearance.BorderSize = 0;
             this.btnPendiente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPendiente.ForeColor = System.Drawing.SystemColors.Control;
@@ -614,7 +667,7 @@
             // 
             // btnCambiar
             // 
-            this.btnCambiar.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnCambiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnCambiar.FlatAppearance.BorderSize = 0;
             this.btnCambiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCambiar.ForeColor = System.Drawing.SystemColors.Control;
@@ -631,7 +684,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(679, 9);
+            this.label4.Location = new System.Drawing.Point(685, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 24);
             this.label4.TabIndex = 3;
@@ -643,7 +696,7 @@
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Arial Black", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(674, 25);
+            this.lblTotal.Location = new System.Drawing.Point(680, 25);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(134, 52);
             this.lblTotal.TabIndex = 2;
@@ -656,7 +709,7 @@
             this.btnCobrarVenta.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCobrarVenta.FlatAppearance.BorderSize = 0;
             this.btnCobrarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCobrarVenta.Location = new System.Drawing.Point(859, 4);
+            this.btnCobrarVenta.Location = new System.Drawing.Point(865, 4);
             this.btnCobrarVenta.Name = "btnCobrarVenta";
             this.btnCobrarVenta.Size = new System.Drawing.Size(151, 40);
             this.btnCobrarVenta.TabIndex = 1;
@@ -667,10 +720,11 @@
             // btnImprimirTicket
             // 
             this.btnImprimirTicket.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImprimirTicket.BackColor = System.Drawing.Color.Teal;
+            this.btnImprimirTicket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnImprimirTicket.FlatAppearance.BorderSize = 0;
             this.btnImprimirTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimirTicket.Location = new System.Drawing.Point(859, 50);
+            this.btnImprimirTicket.ForeColor = System.Drawing.Color.White;
+            this.btnImprimirTicket.Location = new System.Drawing.Point(865, 50);
             this.btnImprimirTicket.Name = "btnImprimirTicket";
             this.btnImprimirTicket.Size = new System.Drawing.Size(152, 27);
             this.btnImprimirTicket.TabIndex = 0;
@@ -680,11 +734,11 @@
             // 
             // tabClientes
             // 
-            this.tabClientes.BackColor = System.Drawing.Color.DarkCyan;
+            this.tabClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.tabClientes.Controls.Add(this.label2);
             this.tabClientes.Location = new System.Drawing.Point(4, 32);
+            this.tabClientes.Margin = new System.Windows.Forms.Padding(0);
             this.tabClientes.Name = "tabClientes";
-            this.tabClientes.Padding = new System.Windows.Forms.Padding(3);
             this.tabClientes.Size = new System.Drawing.Size(1020, 356);
             this.tabClientes.TabIndex = 1;
             this.tabClientes.Text = "CLIENTES";
@@ -692,7 +746,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 3);
+            this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 14);
             this.label2.TabIndex = 1;
@@ -700,8 +754,9 @@
             // 
             // tabProductos
             // 
-            this.tabProductos.BackColor = System.Drawing.Color.DarkCyan;
+            this.tabProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.tabProductos.Location = new System.Drawing.Point(4, 32);
+            this.tabProductos.Margin = new System.Windows.Forms.Padding(0);
             this.tabProductos.Name = "tabProductos";
             this.tabProductos.Size = new System.Drawing.Size(1020, 356);
             this.tabProductos.TabIndex = 2;
@@ -709,8 +764,9 @@
             // 
             // tabInventario
             // 
-            this.tabInventario.BackColor = System.Drawing.Color.DarkCyan;
+            this.tabInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.tabInventario.Location = new System.Drawing.Point(4, 32);
+            this.tabInventario.Margin = new System.Windows.Forms.Padding(0);
             this.tabInventario.Name = "tabInventario";
             this.tabInventario.Size = new System.Drawing.Size(1020, 356);
             this.tabInventario.TabIndex = 3;
@@ -721,11 +777,12 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.DarkCyan;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1031, 479);
             this.panel1.TabIndex = 2;
@@ -733,7 +790,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.BackColor = System.Drawing.Color.DarkCyan;
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1,
@@ -746,6 +803,7 @@
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.Control;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
@@ -759,6 +817,7 @@
             // 
             // labelReloj
             // 
+            this.labelReloj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.labelReloj.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelReloj.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelReloj.Name = "labelReloj";
@@ -778,6 +837,7 @@
             this.panel2.Controls.Add(this.btnInventario);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1031, 53);
             this.panel2.TabIndex = 8;
@@ -810,7 +870,7 @@
             // 
             // btnVentas
             // 
-            this.btnVentas.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnVentas.FlatAppearance.BorderSize = 0;
             this.btnVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVentas.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -823,7 +883,7 @@
             // 
             // btnClientes
             // 
-            this.btnClientes.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnClientes.FlatAppearance.BorderSize = 0;
             this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClientes.ForeColor = System.Drawing.SystemColors.Control;
@@ -836,7 +896,7 @@
             // 
             // btnProductos
             // 
-            this.btnProductos.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnProductos.FlatAppearance.BorderSize = 0;
             this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductos.ForeColor = System.Drawing.SystemColors.Control;
@@ -846,10 +906,11 @@
             this.btnProductos.TabIndex = 6;
             this.btnProductos.Text = "F3 | PRODUCTOS";
             this.btnProductos.UseVisualStyleBackColor = false;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
             // 
             // btnInventario
             // 
-            this.btnInventario.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(71)))), ((int)(((byte)(166)))));
             this.btnInventario.FlatAppearance.BorderSize = 0;
             this.btnInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInventario.ForeColor = System.Drawing.SystemColors.Control;
@@ -860,47 +921,11 @@
             this.btnInventario.Text = "F4 | INVENTARIO";
             this.btnInventario.UseVisualStyleBackColor = false;
             // 
-            // IdProducto
-            // 
-            this.IdProducto.HeaderText = "Codigo de barras";
-            this.IdProducto.Name = "IdProducto";
-            this.IdProducto.ReadOnly = true;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Descripción producto";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio Venta";
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            // 
-            // Importe
-            // 
-            this.Importe.HeaderText = "Importe";
-            this.Importe.Name = "Importe";
-            this.Importe.ReadOnly = true;
-            // 
-            // Existencia
-            // 
-            this.Existencia.HeaderText = "Existencia";
-            this.Existencia.Name = "Existencia";
-            this.Existencia.ReadOnly = true;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkCyan;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.ClientSize = new System.Drawing.Size(1031, 503);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);

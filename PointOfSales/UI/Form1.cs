@@ -24,6 +24,8 @@ namespace PointOfSales
         {
             InitializeComponent();
             InitializeComponents();
+
+           
         }
 
         private void InitializeComponents()
@@ -126,6 +128,7 @@ namespace PointOfSales
             toolStripStatusLabel1.Text = "CONECTADO";
             toolStripProgressBar1.Value = 100;
             toolStripProgressBar1.Visible = false;
+            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
         }
 
         
@@ -225,5 +228,23 @@ namespace PointOfSales
                 }
             }
         }
+
+        private void dgvProductosVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnProductos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
+
     }
 }
