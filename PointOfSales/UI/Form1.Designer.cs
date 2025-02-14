@@ -47,12 +47,6 @@
             this.tabControlVentas = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvProductosVenta = new System.Windows.Forms.DataGridView();
-            this.ColumnCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnExistencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnVerificador = new System.Windows.Forms.Button();
             this.btnBorrarArt = new System.Windows.Forms.Button();
@@ -99,6 +93,12 @@
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnInventario = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabVentas.SuspendLayout();
@@ -277,12 +277,12 @@
             this.dgvProductosVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProductosVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductosVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnCodigo,
-            this.ColumnProducto,
-            this.ColumnPrecio,
-            this.ColumnCantidad,
-            this.ColumnImporte,
-            this.ColumnExistencia});
+            this.IdProducto,
+            this.Producto,
+            this.Precio,
+            this.Cantidad,
+            this.Importe,
+            this.Existencia});
             this.dgvProductosVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductosVenta.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvProductosVenta.Location = new System.Drawing.Point(3, 3);
@@ -300,42 +300,6 @@
             this.dgvProductosVenta.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProductosVenta.Size = new System.Drawing.Size(1000, 168);
             this.dgvProductosVenta.TabIndex = 0;
-            // 
-            // ColumnCodigo
-            // 
-            this.ColumnCodigo.HeaderText = "Codigo de barras";
-            this.ColumnCodigo.Name = "ColumnCodigo";
-            this.ColumnCodigo.ReadOnly = true;
-            // 
-            // ColumnProducto
-            // 
-            this.ColumnProducto.HeaderText = "Descripción producto";
-            this.ColumnProducto.Name = "ColumnProducto";
-            this.ColumnProducto.ReadOnly = true;
-            // 
-            // ColumnPrecio
-            // 
-            this.ColumnPrecio.HeaderText = "Precio Venta";
-            this.ColumnPrecio.Name = "ColumnPrecio";
-            this.ColumnPrecio.ReadOnly = true;
-            // 
-            // ColumnCantidad
-            // 
-            this.ColumnCantidad.HeaderText = "Cantidad";
-            this.ColumnCantidad.Name = "ColumnCantidad";
-            this.ColumnCantidad.ReadOnly = true;
-            // 
-            // ColumnImporte
-            // 
-            this.ColumnImporte.HeaderText = "Importe";
-            this.ColumnImporte.Name = "ColumnImporte";
-            this.ColumnImporte.ReadOnly = true;
-            // 
-            // ColumnExistencia
-            // 
-            this.ColumnExistencia.HeaderText = "Existencia";
-            this.ColumnExistencia.Name = "ColumnExistencia";
-            this.ColumnExistencia.ReadOnly = true;
             // 
             // panel5
             // 
@@ -667,7 +631,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(724, 9);
+            this.label4.Location = new System.Drawing.Point(679, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 24);
             this.label4.TabIndex = 3;
@@ -679,7 +643,7 @@
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Arial Black", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(719, 25);
+            this.lblTotal.Location = new System.Drawing.Point(674, 25);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(134, 52);
             this.lblTotal.TabIndex = 2;
@@ -896,6 +860,42 @@
             this.btnInventario.Text = "F4 | INVENTARIO";
             this.btnInventario.UseVisualStyleBackColor = false;
             // 
+            // IdProducto
+            // 
+            this.IdProducto.HeaderText = "Codigo de barras";
+            this.IdProducto.Name = "IdProducto";
+            this.IdProducto.ReadOnly = true;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Descripción producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio Venta";
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // Importe
+            // 
+            this.Importe.HeaderText = "Importe";
+            this.Importe.Name = "Importe";
+            this.Importe.ReadOnly = true;
+            // 
+            // Existencia
+            // 
+            this.Existencia.HeaderText = "Existencia";
+            this.Existencia.Name = "Existencia";
+            this.Existencia.ReadOnly = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1000,13 +1000,13 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnAsignarCliente;
         private System.Windows.Forms.DataGridView dgvProductosVenta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCodigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrecio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnImporte;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnExistencia;
         private System.Windows.Forms.ToolStripStatusLabel labelReloj;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Existencia;
     }
 }
 

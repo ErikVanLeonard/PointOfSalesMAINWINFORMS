@@ -97,10 +97,10 @@ namespace PointOfSales.Utilities
                 // Funcionalidad anterior: Imprimir desde DataGridView
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
-                    string nombre = row.Cells["Nombre"]?.Value?.ToString() ?? "Sin nombre";
+                    string nombre = row.Cells["Producto"]?.Value?.ToString() ?? "Sin nombre";
                     int cantidad = Convert.ToInt32(row.Cells["Cantidad"]?.Value ?? 0);
                     decimal precioUnitario = Convert.ToDecimal(row.Cells["Precio"]?.Value ?? 0);
-                    decimal subtotal = Convert.ToDecimal(row.Cells["Subtotal"]?.Value ?? 0);
+                    decimal subtotal = Convert.ToDecimal(row.Cells["Importe"]?.Value ?? 0);
 
                     string lineaProducto = $"{nombre} ({cantidad}) - {precioUnitario:C2} = {subtotal:C2}";
                     g.DrawString(lineaProducto, detalleFont, Brushes.Black, new PointF(10, posY));
