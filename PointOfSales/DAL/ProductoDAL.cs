@@ -20,7 +20,7 @@ namespace PointOfSales.DAL
         /// Obtiene un producto por su código de barras.
         /// </summary>
         /// <param name="codigoBarras">Código de barras del producto.</param>
-        /// <returns>Objeto Producto si existe, o null si no existe.</returns>
+        /// <returns>Objeto Producto si existe, null si no existe.</returns>
         public Producto ObtenerProductoPorCodigoBarras(string codigoBarras)
         {
             using (SqlConnection conn = GetConnection())

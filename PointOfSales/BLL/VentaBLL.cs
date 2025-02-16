@@ -52,5 +52,20 @@ namespace PointOfSales.BLL
             return ventaDAL.ObtenerUltimaVenta();
         }
 
+        public List<Venta> ObtenerVentasFiltradas(DateTime fechaInicial, DateTime fechaFinal, int? idUsuario, int? idCliente)
+        {
+            return ventaDAL.ObtenerVentasFiltradas(fechaInicial, fechaFinal, idUsuario, idCliente);
+        }
+
+        public List<Usuario> ObtenerUsuarios()
+        {
+            return ventaDAL.ObtenerUsuarios();
+        }
+
+        public List<Cliente> ObtenerClientes()
+        {
+            return ventaDAL.ObtenerClientes();
+        }
+
     }
 }

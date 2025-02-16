@@ -112,6 +112,7 @@
     <Compile Include="DAL\ProductoDAL.cs" />
     <Compile Include="DAL\UsuarioDAL.cs" />
     <Compile Include="DAL\VentaDAL.cs" />
+    <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Producto.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Venta.cs" />
@@ -128,6 +129,18 @@
     </Compile>
     <Compile Include="UI\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormPago.Designer.cs">
+      <DependentUpon>FormPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reportes\FormReporteVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Reportes\FormReporteVentas.Designer.cs">
+      <DependentUpon>FormReporteVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\ClockManager.cs" />
     <Compile Include="Utilities\LoggerManager.cs" />
@@ -147,6 +160,12 @@
     </Compile>
     <EmbeddedResource Include="UI\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormPago.resx">
+      <DependentUpon>FormPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Reportes\FormReporteVentas.resx">
+      <DependentUpon>FormReporteVentas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="NLog.config" />
     <None Include="packages.config" />

@@ -67,12 +67,12 @@
             this.txtBuscarProducto = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblCantidadArticulos = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.btnAsignarCliente = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblTotalPago = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -89,8 +89,6 @@
             this.tabInventario = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.labelReloj = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -100,6 +98,7 @@
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnInventario = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabVentas.SuspendLayout();
@@ -150,6 +149,8 @@
             // 
             // reportesToolStripMenuItem
             // 
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ventasToolStripMenuItem});
             this.reportesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
@@ -513,12 +514,12 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
-            this.panel4.Controls.Add(this.label13);
+            this.panel4.Controls.Add(this.lblCantidadArticulos);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.btnAsignarCliente);
             this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.label8);
+            this.panel4.Controls.Add(this.lblTotalPago);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.label5);
@@ -536,27 +537,28 @@
             this.panel4.Size = new System.Drawing.Size(1020, 80);
             this.panel4.TabIndex = 2;
             // 
-            // label13
+            // lblCantidadArticulos
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(212, 48);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(21, 23);
-            this.label13.TabIndex = 15;
-            this.label13.Text = "0";
+            this.lblCantidadArticulos.AutoSize = true;
+            this.lblCantidadArticulos.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidadArticulos.ForeColor = System.Drawing.Color.White;
+            this.lblCantidadArticulos.Location = new System.Drawing.Point(430, 50);
+            this.lblCantidadArticulos.Name = "lblCantidadArticulos";
+            this.lblCantidadArticulos.Size = new System.Drawing.Size(21, 23);
+            this.lblCantidadArticulos.TabIndex = 15;
+            this.lblCantidadArticulos.Text = "0";
+            this.lblCantidadArticulos.Click += new System.EventHandler(this.lblCantidadArticulos_Click);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(239, 54);
+            this.label12.Location = new System.Drawing.Point(261, 54);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(160, 15);
+            this.label12.Size = new System.Drawing.Size(163, 15);
             this.label12.TabIndex = 14;
-            this.label12.Text = "Articulos en la venta actual";
+            this.label12.Text = "Articulos en la venta actual:";
             // 
             // btnAsignarCliente
             // 
@@ -594,16 +596,16 @@
             this.label9.TabIndex = 11;
             this.label9.Text = "$0.00";
             // 
-            // label8
+            // lblTotalPago
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(5, 55);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(38, 15);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "$0.00";
+            this.lblTotalPago.AutoSize = true;
+            this.lblTotalPago.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalPago.ForeColor = System.Drawing.Color.White;
+            this.lblTotalPago.Location = new System.Drawing.Point(5, 55);
+            this.lblTotalPago.Name = "lblTotalPago";
+            this.lblTotalPago.Size = new System.Drawing.Size(38, 15);
+            this.lblTotalPago.TabIndex = 10;
+            this.lblTotalPago.Text = "$0.00";
             // 
             // label7
             // 
@@ -728,7 +730,7 @@
             this.btnImprimirTicket.Name = "btnImprimirTicket";
             this.btnImprimirTicket.Size = new System.Drawing.Size(152, 27);
             this.btnImprimirTicket.TabIndex = 0;
-            this.btnImprimirTicket.Text = "Imprimir Ticket";
+            this.btnImprimirTicket.Text = "Imprimir ultima venta";
             this.btnImprimirTicket.UseVisualStyleBackColor = false;
             this.btnImprimirTicket.Click += new System.EventHandler(this.btnImprimirTicket_Click);
             // 
@@ -792,28 +794,12 @@
             // 
             this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1,
             this.labelReloj});
             this.statusStrip1.Location = new System.Drawing.Point(0, 457);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1031, 22);
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(68)))));
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.Control;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(119, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             // 
             // labelReloj
             // 
@@ -822,7 +808,7 @@
             this.labelReloj.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelReloj.Name = "labelReloj";
             this.labelReloj.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelReloj.Size = new System.Drawing.Size(795, 17);
+            this.labelReloj.Size = new System.Drawing.Size(1016, 17);
             this.labelReloj.Spring = true;
             this.labelReloj.Text = "00:00:00 TT";
             this.labelReloj.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -921,6 +907,13 @@
             this.btnInventario.Text = "F4 | INVENTARIO";
             this.btnInventario.UseVisualStyleBackColor = false;
             // 
+            // ventasToolStripMenuItem
+            // 
+            this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
+            this.ventasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ventasToolStripMenuItem.Text = "Ventas";
+            this.ventasToolStripMenuItem.Click += new System.EventHandler(this.ventasToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -999,11 +992,9 @@
         private System.Windows.Forms.Button btnPendiente;
         private System.Windows.Forms.Button btnCambiar;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblTotalPago;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -1021,7 +1012,7 @@
         private System.Windows.Forms.Button btnEntradas;
         private System.Windows.Forms.Button btnBorrarArt;
         private System.Windows.Forms.Button btnVerificador;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblCantidadArticulos;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnAsignarCliente;
         private System.Windows.Forms.DataGridView dgvProductosVenta;
@@ -1032,6 +1023,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
         private System.Windows.Forms.DataGridViewTextBoxColumn Existencia;
+        private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
     }
 }
 

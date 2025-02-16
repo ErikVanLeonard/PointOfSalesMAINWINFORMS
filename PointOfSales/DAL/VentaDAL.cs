@@ -38,6 +38,7 @@ namespace PointOfSales.DAL
                     cmdVenta.Parameters.AddWithValue("@Fecha", venta.Fecha);
                     cmdVenta.Parameters.AddWithValue("@Total", venta.Total);
                     cmdVenta.Parameters.AddWithValue("@IdUsuario", venta.IdUsuario);
+                    cmdVenta.Parameters.AddWithValue("@IdCliente", venta.IdCliente);
 
                     var detallesJson = JsonConvert.SerializeObject(venta.Detalles);
                     cmdVenta.Parameters.AddWithValue("@Detalles", detallesJson);
@@ -133,6 +134,84 @@ namespace PointOfSales.DAL
             }
         }
 
+        public List<Venta> ObtenerVentasFiltradas(DateTime fechaInicial, DateTime fechaFinal, int? idUsuario, int? idCliente)
+        {
+            List<Venta> ventas = new List<Venta>();
+
+            using (SqlConnection conn = GetConnection())
+            {
+                SqlCommand cmd = new SqlCommand("sp_ObtenerVentasFiltradas", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@FechaInicial", fechaInicial);
+                cmd.Parameters.AddWithValue("@FechaFinal", fechaFinal);
+                cmd.Parameters.AddWithValue("@IdUsuario", idUsuario ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@IdCliente", idCliente ?? (object)DBNull.Value);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ventas.Add(new Venta
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Total = Convert.ToDecimal(reader["Total"]),
+                            IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
+                            IdCliente = reader["IdCliente"] != DBNull.Value ? Convert.ToInt64(reader["IdCliente"]) : 0
+                        });
+                    }
+                }
+            }
+
+            return ventas;
+        }
+
+        public List<Usuario> ObtenerUsuarios()
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+
+            using (SqlConnection conn = GetConnection())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT Id, Nombre FROM Usuarios", conn);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        usuarios.Add(new Usuario
+                        {
+                            Id = (int)reader["Id"],
+                            Nombre = reader["Nombre"].ToString()
+                        });
+                    }
+                }
+            }
+
+            return usuarios;
+        }
+
+        public List<Cliente> ObtenerClientes()
+        {
+            List<Cliente> clientes = new List<Cliente>();
+
+            using (SqlConnection conn = GetConnection())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT Id, Nombre FROM Clientes", conn);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        clientes.Add(new Cliente
+                        {
+                            Id = (int)reader["Id"],
+                            Nombre = reader["Nombre"].ToString()
+                        });
+                    }
+                }
+            }
+
+            return clientes;
+        }
 
     }
 }

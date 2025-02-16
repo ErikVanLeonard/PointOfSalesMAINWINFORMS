@@ -2,6 +2,7 @@
 using PointOfSales.DAL;
 using PointOfSales.Entities;
 using PointOfSales.UI;
+using PointOfSales.UI.Reportes;
 using PointOfSales.Utilities;
 using System;
 using System.Collections.Generic;
@@ -68,22 +69,39 @@ namespace PointOfSales
         {
             try
             {
-                // Crear y registrar la venta
-                Venta venta = CrearVenta();
-                ventaBLL.RegistrarVenta(venta);
+                // Calcular el total de la venta
+                decimal totalVenta = CalcularTotal();
 
-                // Imprimir el ticket
-                ticketPrinter = new TicketPrinter(dgvProductosVenta, venta.Total);
-                ticketPrinter.ImprimirTicket();
+                // Mostrar el formulario de pago
+                using (FormPago formPago = new FormPago(totalVenta))
+                {
+                    var resultado = formPago.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        // Obtener el cambio calculado
+                        decimal cambio = formPago.Cambio;
 
-                // Limpiar el formulario
-                LimpiarFormulario();
-                MessageBox.Show("Venta registrada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Crear y registrar la venta
+                        Venta venta = CrearVenta();
+                        ventaBLL.RegistrarVenta(venta);
+
+                        // Imprimir el ticket
+                        ticketPrinter = new TicketPrinter(dgvProductosVenta, venta.Total);
+                        ticketPrinter.ImprimirTicket();
+
+                        // Mostrar mensaje de éxito con el cambio
+                        MessageBox.Show($"Venta registrada exitosamente.\nCambio: ${cambio:F2}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Limpiar el formulario
+                        LimpiarFormulario();
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private Venta CrearVenta()
@@ -125,10 +143,10 @@ namespace PointOfSales
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "CONECTADO";
-            toolStripProgressBar1.Value = 100;
-            toolStripProgressBar1.Visible = false;
-            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
+            //lblEstatus.Text = "CONECTADO";
+            //toolStripProgressBar1.Value = 100;
+            //toolStripProgressBar1.Visible = false;
+            //tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
         }
 
         
@@ -143,12 +161,15 @@ namespace PointOfSales
                     row.Cells["Cantidad"].Value = cantidadActual + 1;
                     row.Cells["Importe"].Value = (cantidadActual + 1) * producto.Precio;
                     ActualizarTotalVenta();
+                    ActualizarCantidadArticulos();
+
                     return;
                 }
             }
 
             dgvProductosVenta.Rows.Add(producto.Id, producto.Nombre, producto.Precio, 1, producto.Precio, producto.Stock);
             ActualizarTotalVenta();
+            ActualizarCantidadArticulos();
         }
 
         private void ActualizarTotalVenta()
@@ -162,6 +183,7 @@ namespace PointOfSales
                 }
             }
             lblTotal.Text = $"${totalVenta:F2}";
+            lblTotalPago.Text = $"{totalVenta}";
         }
 
         private List<DetalleVenta> ObtenerDetallesVenta()
@@ -244,7 +266,31 @@ namespace PointOfSales
 
         }
 
-        
+        private void lblCantidadArticulos_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void ActualizarCantidadArticulos()
+        {
+            int cantidadTotal = 0;
+
+            foreach (DataGridViewRow row in dgvProductosVenta.Rows)
+            {
+                if (row.Cells["Cantidad"].Value != null)
+                {
+                    cantidadTotal += Convert.ToInt32(row.Cells["Cantidad"].Value);
+                }
+            }
+
+            lblCantidadArticulos.Text = $"{cantidadTotal}";
+        }
+
+        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+            FormReporteVentas formReporteVentas = new FormReporteVentas();
+            formReporteVentas.Show();
+        }
     }
 }
