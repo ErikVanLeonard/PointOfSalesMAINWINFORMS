@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PointOfSales.BLL;
 using PointOfSales.DAL;
+using PointOfSales.Entities;
 
 namespace PointOfSales.UI
 {
     public partial class FormLogin : Form
     {
+        public static Usuario UsuarioActual { get; private set; } // Propiedad estática para almacenar el usuario actual
         private UsuarioBLL usuarioBLL = new UsuarioBLL();
 
         // Propiedad para almacenar el resultado del inicio de sesión
@@ -52,6 +54,8 @@ namespace PointOfSales.UI
                 // Si las credenciales son válidas, marcar el inicio de sesión como exitoso
                 LoginExitoso = true;
                 idUsuarioActual = idUsuario;
+
+
 
                 MessageBox.Show("Inicio de sesión exitoso.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

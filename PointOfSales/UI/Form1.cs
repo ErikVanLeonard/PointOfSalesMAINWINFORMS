@@ -20,15 +20,20 @@ namespace PointOfSales
         private TabManager tabManager;
         private VentaBLL ventaBLL = new VentaBLL();
         private decimal totalVenta = 0;
+        
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public FormMain()
         {
             InitializeComponent();
             InitializeComponents();
-
-           
         }
 
+        /// <summary>
+        /// Inicializa los componentes necesarios para el formulario
+        /// </summary>
         private void InitializeComponents()
         {
             this.TopMost = false;
@@ -40,11 +45,21 @@ namespace PointOfSales
             this.KeyDown += FormMain_KeyDown;
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al presionar una tecla
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
             tabManager.CambiarPestana(e.KeyCode);
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al hacer clic en el botón "Agregar"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnImprimirTicket_Click(object sender, EventArgs e)
         {
             try
@@ -65,6 +80,11 @@ namespace PointOfSales
             }
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al hacer clic en el botón "Cobrar"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCobrarVenta_Click(object sender, EventArgs e)
         {
             try
@@ -104,6 +124,10 @@ namespace PointOfSales
 
         }
 
+        /// <summary>
+        /// Crea una nueva venta con los datos ingresados en el formulario
+        /// </summary>
+        /// <returns></returns>
         private Venta CrearVenta()
         {
             return new Venta
@@ -115,6 +139,11 @@ namespace PointOfSales
             };
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al hacer clic en el botón "Cancelar"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void abrirTurnoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Hide();
@@ -130,6 +159,9 @@ namespace PointOfSales
             }
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al hacer clic en el botón "Salir"
+        /// </summary>
         private void HabilitarInterfaz()
         {
             facturaciónToolStripMenuItem.Visible = true;
@@ -141,6 +173,11 @@ namespace PointOfSales
             abrirTurnoToolStripMenuItem.Visible = false;
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al hacer clic en el botón "Salir"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
             //lblEstatus.Text = "CONECTADO";
@@ -149,8 +186,11 @@ namespace PointOfSales
             //tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
         }
 
-        
 
+        /// <summary>
+        /// Evento que se ejecuta al hacer clic en el botón "Salir"
+        /// </summary>
+        /// <param name="producto"></param>
         private void AgregarProductoAlDataGridView(Producto producto)
         {
             foreach (DataGridViewRow row in dgvProductosVenta.Rows)
@@ -172,6 +212,9 @@ namespace PointOfSales
             ActualizarCantidadArticulos();
         }
 
+        /// <summary>
+        /// Actualiza el total de la venta en el formulario
+        /// </summary>
         private void ActualizarTotalVenta()
         {
             totalVenta = 0;
@@ -186,6 +229,10 @@ namespace PointOfSales
             lblTotalPago.Text = $"{totalVenta}";
         }
 
+        /// <summary>
+        /// Obtiene los detalles de la venta a partir de los datos ingresados en el formulario
+        /// </summary>
+        /// <returns></returns>
         private List<DetalleVenta> ObtenerDetallesVenta()
         {
             List<DetalleVenta> detalles = new List<DetalleVenta>();
@@ -201,6 +248,10 @@ namespace PointOfSales
             return detalles;
         }
 
+        /// <summary>
+        /// Calcula el total de la venta a partir de los datos ingresados en el formulario
+        /// </summary>
+        /// <returns></returns>
         private decimal CalcularTotal()
         {
             decimal total = 0;
@@ -214,12 +265,19 @@ namespace PointOfSales
             return total;
         }
 
+        /// <summary>
+        /// Obtiene el ID del usuario actual
+        /// </summary>
+        /// <returns></returns>
         private int ObtenerIdUsuarioActual()
         {
             // Lógica para obtener el ID del usuario actual
             return 1; // Reemplaza con tu lógica
         }
 
+        /// <summary>
+        /// Limpia el formulario de ventas
+        /// </summary>
         private void LimpiarFormulario()
         {
             dgvProductosVenta.Rows.Clear();
@@ -227,6 +285,11 @@ namespace PointOfSales
             totalVenta = 0;
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al presionar una tecla en el cuadro de búsqueda de productos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtBuscarProducto_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -271,6 +334,10 @@ namespace PointOfSales
 
         }
 
+
+        /// <summary>
+        /// Actualiza la cantidad total de artículos en la venta
+        /// </summary>
         private void ActualizarCantidadArticulos()
         {
             int cantidadTotal = 0;
@@ -286,11 +353,22 @@ namespace PointOfSales
             lblCantidadArticulos.Text = $"{cantidadTotal}";
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al hacer clic
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Hide();
+            
             FormReporteVentas formReporteVentas = new FormReporteVentas();
+            formReporteVentas.Owner = this;
             formReporteVentas.Show();
+        }
+
+        private void FormMain_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
