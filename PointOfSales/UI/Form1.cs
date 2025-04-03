@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PointOfSales
@@ -193,23 +194,37 @@ namespace PointOfSales
         /// <param name="producto"></param>
         private void AgregarProductoAlDataGridView(Producto producto)
         {
-            foreach (DataGridViewRow row in dgvProductosVenta.Rows)
+
+            DataGridView dgv = tabControlVentas.SelectedTab.Controls[0] as DataGridView;
+
+            if (producto == null)
             {
-                if ((int)row.Cells["IdProducto"].Value == producto.Id)
-                {
-                    int cantidadActual = (int)row.Cells["Cantidad"].Value;
-                    row.Cells["Cantidad"].Value = cantidadActual + 1;
-                    row.Cells["Importe"].Value = (cantidadActual + 1) * producto.Precio;
-                    ActualizarTotalVenta();
-                    ActualizarCantidadArticulos();
-
-                    return;
-                }
+                MessageBox.Show("El articulo buscado no fue encontrado. Verifique e intente nuevamente", "Producto no en<contrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
+            else
+            {
+                // Verificar si el producto ya existe en el DataGridView
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    if ((int)row.Cells["IdProducto"].Value == producto.Id)
+                    {
+                        int cantidadActual = (int)row.Cells["Cantidad"].Value;
+                        row.Cells["Cantidad"].Value = cantidadActual + 1;
+                        row.Cells["Subtotal"].Value = (cantidadActual + 1) * producto.Precio;
+                        ActualizarTotalVenta();
+                        ActualizarCantidadArticulos();
 
-            dgvProductosVenta.Rows.Add(producto.Id, producto.Nombre, producto.Precio, 1, producto.Precio, producto.Stock);
-            ActualizarTotalVenta();
-            ActualizarCantidadArticulos();
+                        return;
+                    }
+                }
+
+                // Si el producto no existe, agregarlo como una nueva fila
+                dgv.Rows.Add(producto.Id, producto.CodigoBarras, producto.Descripcion, producto.Precio, 1, producto.Precio, producto.Stock);
+                ActualizarTotalVenta();
+                ActualizarCantidadArticulos();
+            }
+            
         }
 
         /// <summary>
@@ -217,16 +232,21 @@ namespace PointOfSales
         /// </summary>
         private void ActualizarTotalVenta()
         {
-            totalVenta = 0;
-            foreach (DataGridViewRow row in dgvProductosVenta.Rows)
+            if (tabControlVentas.SelectedTab == null || tabControlVentas.SelectedTab.Controls.Count == 0)
+                return;
+
+            DataGridView dgv = tabControlVentas.SelectedTab.Controls[0] as DataGridView;
+            if (dgv == null)
+                return;
+
+            decimal total = 0;
+            foreach (DataGridViewRow row in dgv.Rows)
             {
-                if (row.Cells["Importe"].Value != null)
-                {
-                    totalVenta += Convert.ToDecimal(row.Cells["Importe"].Value);
-                }
+                total += Convert.ToDecimal(row.Cells["Importe"].Value);
             }
-            lblTotal.Text = $"${totalVenta:F2}";
-            lblTotalPago.Text = $"{totalVenta}";
+
+            // Actualizar el total en algún control (por ejemplo, un Label)
+            lblTotal.Text = $"Total: {total:C}";
         }
 
         /// <summary>
@@ -304,6 +324,12 @@ namespace PointOfSales
                     }
 
                     Producto producto = new ProductoDAL().ObtenerProductoPorCodigoBarras(codigoBarras);
+                    if (producto == null)
+                    {
+                        MessageBox.Show("El producto no fue encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     AgregarProductoAlDataGridView(producto);
                     txtBuscarProducto.Clear();
                 }
@@ -340,17 +366,17 @@ namespace PointOfSales
         /// </summary>
         private void ActualizarCantidadArticulos()
         {
-            int cantidadTotal = 0;
+            if (tabControlVentas.SelectedTab == null || tabControlVentas.SelectedTab.Controls.Count == 0)
+                return;
 
-            foreach (DataGridViewRow row in dgvProductosVenta.Rows)
-            {
-                if (row.Cells["Cantidad"].Value != null)
-                {
-                    cantidadTotal += Convert.ToInt32(row.Cells["Cantidad"].Value);
-                }
-            }
+            DataGridView dgv = tabControlVentas.SelectedTab.Controls[0] as DataGridView;
+            if (dgv == null)
+                return;
 
-            lblCantidadArticulos.Text = $"{cantidadTotal}";
+            int cantidadArticulos = dgv.Rows.Cast<DataGridViewRow>().Sum(row => Convert.ToInt32(row.Cells["Cantidad"].Value));
+
+            // Actualizar la cantidad de artículos en algún control (por ejemplo, un Label)
+            lblCantidadArticulos.Text = $"Artículos: {cantidadArticulos}";
         }
 
         /// <summary>
@@ -368,6 +394,39 @@ namespace PointOfSales
 
         private void FormMain_Load_1(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnCambiar_Click(object sender, EventArgs e)
+        {
+            // Crear una nueva pestaña
+            TabPage nuevaTab = new TabPage("Venta " + (tabControlVentas.TabCount + 1));
+
+            // Crear un nuevo DataGridView
+            DataGridView dgv = new DataGridView
+            {
+                Dock = DockStyle.Fill,
+                AutoGenerateColumns = false,
+                AllowUserToAddRows = false,
+                RowHeadersVisible = false
+            };
+
+            // Definir las columnas del DataGridView
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "IdProducto", HeaderText = "IdProducto", DataPropertyName = "IdProducto", Visible = false });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Producto", HeaderText = "Descripción", DataPropertyName = "Descripcion" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Precio", HeaderText = "Precio", DataPropertyName = "PrecioVenta" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Cantidad", HeaderText = "Cantidad", DataPropertyName = "Cantidad" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "importe", HeaderText = "Subtotal", DataPropertyName = "Subtotal" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Existencia", HeaderText = "Existencias", DataPropertyName = "Existencias" });
+
+            // Agregar el DataGridView a la pestaña
+            nuevaTab.Controls.Add(dgv);
+
+            // Agregar la pestaña al TabControl
+            tabControlVentas.TabPages.Add(nuevaTab);
+
+            // Seleccionar la nueva pestaña
+            tabControlVentas.SelectedTab = nuevaTab;
 
         }
     }
